@@ -1,0 +1,165 @@
+setopt histignorealldups sharehistory
+
+# Keep 1000 lines of history within the shell and save it to ~/.zsh_history:
+HISTSIZE=1000
+SAVEHIST=1000
+HISTFILE=~/.zsh_history
+
+# Use emacs keybindings even if our EDITOR is set to vi
+bindkey -e
+
+setopt nobeep	            # No beeping
+setopt AUTOPUSHD PUSHDMINUS PUSHDSILENT PUSHDTOHOME
+setopt AUTOCD			    # cd by typing dirname
+setopt cdablevars	        # Follow variables which are dirnames
+setopt interactivecomments	# allow comments on cmd line.
+# setopt SH_WORD_SPLIT      # split up var in "for x in *"
+setopt MULTIOS			    # Allow multiple redirection echo 'a'>b>c
+setopt CORRECT CORRECT_ALL	# Try to correct command line spelling
+setopt BANG_HIST		    # Allow ! for accessing history
+setopt NOHUP			    # Don't HUP running jobs on logout.
+setopt NOBGNICE             # Don't renice background jobs
+setopt EXTENDED_GLOB        # Enable extended globbing
+
+zstyle ':completion:*' auto-description 'specify: %d'
+zstyle ':completion:*' completer _expand _complete _correct _approximate
+zstyle ':completion:*' use-cache on
+# Enable menu completion
+zstyle ':completion*:default' menu 'select=1'
+zstyle ':completion:*' format 'Completing %d'
+zstyle ':completion:*' group-name ''
+zstyle ':completion:*' menu select=2
+eval "$(dircolors -b)"
+zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
+zstyle ':completion:*' list-colors ''
+zstyle ':completion:*' list-prompt %SAt %p: Hit TAB for more, or the character to insert%s
+zstyle ':completion:*' matcher-list '' 'm:{a-z}={A-Z}' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=* l:|=*'
+zstyle ':completion:*' menu select=long
+zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p%s
+zstyle ':completion:*' use-compctl false
+zstyle ':completion:*' verbose true
+
+zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
+zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
+
+# Use modern completion system
+autoload -Uz compinit
+compinit
+
+
+#Prompt
+autoload -Uz promptinit
+autoload -Uz vcs_info
+promptinit
+
+zstyle ':vcs_info:*' stagedstr '%F{28} ●'
+zstyle ':vcs_info:*' unstagedstr '%F{11} ●'
+zstyle ':vcs_info:*' check-for-changes true
+zstyle ':vcs_info:(sv[nk]|bzr):*' branchformat '%b%F{1}:%F{11}%r'
+zstyle ':vcs_info:*' enable git svn
+precmd () {
+  if [[ -z $(git ls-files --other --exclude-standard 2> /dev/null) ]] {
+    zstyle ':vcs_info:*' formats ' %F{blue}%F{green}%b%c%u%F{blue}'
+  } else {
+    zstyle ':vcs_info:*' formats ' %F{blue}%F{green}%b%c%u%F{red} ●%F{blue}'
+  }
+  vcs_info
+}
+
+setopt prompt_subst
+WHITE='\e[0;37m'
+PROMPT='%F{WHITE}%~${vcs_info_msg_0_}%F{blue} > %F{WHITE}%{$reset_color%}'
+#end prompt
+
+autoload -Uz colors
+colors
+
+#------------------------------------------------------------------------Functions
+#Extraction from archive
+extract () {
+ if [ -f $1 ] ; then
+ case $1 in
+ *.tar.bz2)   tar xjf $1        ;;
+ *.tar.gz)    tar xzf $1     ;;
+ *.bz2)       bunzip2 $1       ;;
+ *.rar)       unrar x $1     ;;
+ *.gz)        gunzip $1     ;;
+ *.tar)       tar xf $1        ;;
+ *.tbz2)      tar xjf $1      ;;
+ *.tgz)       tar xzf $1       ;;
+ *.zip)       unzip $1     ;;
+ *.Z)         uncompress $1  ;;
+ *.7z)        7z x $1    ;;
+ *.tbz)       tar xjvf  ;;
+ *)           echo "я не в курсе как распаковать '$1'..." ;;
+ esac
+ else
+ echo "'$1' is not a valid file"
+ fi
+}
+
+#Packaging in a archive
+pk () {
+ if [ $1 ] ; then
+ case $1 in
+ tbz)       tar cjvf $2.tar.bz2 $2      ;;
+ tgz)       tar czvf $2.tar.gz  $2       ;;
+ tar)      tar cpvf $2.tar  $2       ;;
+ bz2)    bzip $2 ;;
+ gz)        gzip -c -9 -n $2 > $2.gz ;;
+ zip)       zip -r $2.zip $2   ;;
+ 7z)        7z a $2.7z $2    ;;
+ *)         echo "'$1' cannot be packed via pk()" ;;
+ esac
+ else
+ echo "'$1' is not a valid file"
+ fi
+}
+
+#Rename
+name() {
+    name=$1
+    vared -c -p 'rename to: ' name
+    command mv $1 $name
+}
+
+#Create and cd
+function take() {
+    mkdir -p "$1"
+    cd "$1"
+}
+
+#---------------------------------------------------------Constants
+
+#JAVA
+export JAVA_HOME="/usr/lib/jvm/java-6-sun-1.6.0.26"
+export JDK_HOME="/usr/lib/jvm/java-6-sun-1.6.0.26"
+export JBOSS_HOME="~/Programs/jboss-6.1.0.Final"
+export M2_HOME="/usr/local/apache-maven/apache-maven-3.0.3"
+export MAVEN_HOME="/usr/local/apache-maven/apache-maven-3.0.3"
+export M2="/usr/local/apache-maven/apache-maven-3.0.3/bin"
+export PATH=$PATH:$JBOSS_HOME/bin:$M2_HOME/bin
+
+
+#RUBY
+export CUCUMBER_COLORS=passed=green,bold:passed_param=white,bold,underline
+
+export RUBY_HEAP_MIN_SLOTS=600000
+export RUBY_HEAP_SLOTS_INCREMENT=10000
+export RUBY_HEAP_SLOTS_GROWTH_FACTOR=1.8
+export RUBY_GC_MALLOC_LIMIT=59000000
+export RUBY_HEAP_FREE_MIN=100000
+
+#---------------------------------------------------------Other
+
+#Key bindings
+#bindkey "^K" up-line-or-history
+#bindkey "^J" down-line-or-history
+
+#RVM
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"  # This loads RVM into a shell session.
+
+#PROXY
+#export http_proxy=http://user:pass@host:8080/
+#export ftp_proxy=http://user:pass@host:8080/
+

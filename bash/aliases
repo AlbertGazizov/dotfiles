@@ -1,0 +1,232 @@
+#------------------------------------------------------------------------Functions
+#Extraction from archive
+extract () {
+ if [ -f $1 ] ; then
+ case $1 in
+ *.tar.bz2)   tar xjf $1        ;;
+ *.tar.gz)    tar xzf $1     ;;
+ *.bz2)       bunzip2 $1       ;;
+ *.rar)       unrar x $1     ;;
+ *.gz)        gunzip $1     ;;
+ *.tar)       tar xf $1        ;;
+ *.tbz2)      tar xjf $1      ;;
+ *.tgz)       tar xzf $1       ;;
+ *.zip)       unzip $1     ;;
+ *.Z)         uncompress $1  ;;
+ *.7z)        7z x $1    ;;
+ *.tbz)       tar xjvf  ;;
+ *)           echo "я не в курсе как распаковать '$1'..." ;;
+ esac
+ else
+ echo "'$1' is not a valid file"
+ fi
+}
+
+#Packaging in a archive
+pk () {
+ if [ $1 ] ; then
+ case $1 in
+ tbz)       tar cjvf $2.tar.bz2 $2      ;;
+ tgz)       tar czvf $2.tar.gz  $2       ;;
+ tar)      tar cpvf $2.tar  $2       ;;
+ bz2)    bzip $2 ;;
+ gz)        gzip -c -9 -n $2 > $2.gz ;;
+ zip)       zip -r $2.zip $2   ;;
+ 7z)        7z a $2.7z $2    ;;
+ *)         echo "'$1' cannot be packed via pk()" ;;
+ esac
+ else
+ echo "'$1' is not a valid file"
+ fi
+}
+
+#Rename
+name() {
+    name=$1
+    vared -c -p 'rename to: ' name
+    command mv $1 $name
+}
+
+#Create and cd
+function take() {
+    mkdir -p "$1"
+    cd "$1"
+}
+
+
+#------------------------------------------------------------------------Functions
+#Extraction from archive
+extract () {
+ if [ -f $1 ] ; then
+ case $1 in
+ *.tar.bz2)   tar xjf $1        ;;
+ *.tar.gz)    tar xzf $1     ;;
+ *.bz2)       bunzip2 $1       ;;
+ *.rar)       unrar x $1     ;;
+ *.gz)        gunzip $1     ;;
+ *.tar)       tar xf $1        ;;
+ *.tbz2)      tar xjf $1      ;;
+ *.tgz)       tar xzf $1       ;;
+ *.zip)       unzip $1     ;;
+ *.Z)         uncompress $1  ;;
+ *.7z)        7z x $1    ;;
+ *.tbz)       tar xjvf  ;;
+ *)           echo "я не в курсе как распаковать '$1'..." ;;
+ esac
+ else
+ echo "'$1' is not a valid file"
+ fi
+}
+
+#Packaging in a archive
+pk () {
+ if [ $1 ] ; then
+ case $1 in
+ tbz)       tar cjvf $2.tar.bz2 $2      ;;
+ tgz)       tar czvf $2.tar.gz  $2       ;;
+ tar)      tar cpvf $2.tar  $2       ;;
+ bz2)    bzip $2 ;;
+ gz)        gzip -c -9 -n $2 > $2.gz ;;
+ zip)       zip -r $2.zip $2   ;;
+ 7z)        7z a $2.7z $2    ;;
+ *)         echo "'$1' cannot be packed via pk()" ;;
+ esac
+ else
+ echo "'$1' is not a valid file"
+ fi
+}
+
+#Rename
+name() {
+    name=$1
+    vared -c -p 'rename to: ' name
+    command mv $1 $name
+}
+
+#Create and cd
+function take() {
+    mkdir -p "$1"
+    cd "$1"
+}
+
+
+#------------------------------------------------------------------------Functions
+#Extraction from archive
+extract () {
+ if [ -f $1 ] ; then
+ case $1 in
+ *.tar.bz2)   tar xjf $1        ;;
+ *.tar.gz)    tar xzf $1     ;;
+ *.bz2)       bunzip2 $1       ;;
+ *.rar)       unrar x $1     ;;
+ *.gz)        gunzip $1     ;;
+ *.tar)       tar xf $1        ;;
+ *.tbz2)      tar xjf $1      ;;
+ *.tgz)       tar xzf $1       ;;
+ *.zip)       unzip $1     ;;
+ *.Z)         uncompress $1  ;;
+ *.7z)        7z x $1    ;;
+ *.tbz)       tar xjvf  ;;
+ *)           echo "я не в курсе как распаковать '$1'..." ;;
+ esac
+ else
+ echo "'$1' is not a valid file"
+ fi
+}
+
+#Packaging in a archive
+pk () {
+ if [ $1 ] ; then
+ case $1 in
+ tbz)       tar cjvf $2.tar.bz2 $2      ;;
+ tgz)       tar czvf $2.tar.gz  $2       ;;
+ tar)      tar cpvf $2.tar  $2       ;;
+ bz2)    bzip $2 ;;
+ gz)        gzip -c -9 -n $2 > $2.gz ;;
+ zip)       zip -r $2.zip $2   ;;
+ 7z)        7z a $2.7z $2    ;;
+ *)         echo "'$1' cannot be packed via pk()" ;;
+ esac
+ else
+ echo "'$1' is not a valid file"
+ fi
+}
+
+#Rename
+name() {
+    name=$1
+    vared -c -p 'rename to: ' name
+    command mv $1 $name
+}
+
+#Create and cd
+function take() {
+    mkdir -p "$1"
+    cd "$1"
+}
+
+
+# Common aliases
+alias reload='source ~/bin/dotfiles/bash/aliases'
+alias c='clear'
+alias h='history'
+alias s='sudo'
+alias vi='vim'
+alias mongod='cd ~/Programs/mongodb6/bin && sudo ./mongod'
+alias cdd='cd -'
+alias cdpl='cd ~/Projects/ruby/esp/platform'
+alias cddi='cd ~/Projects/ruby/DecideIt-Test-Task'
+alias ls='ls --color=auto'
+alias ll='ls -lhG --color=auto'  # -l long listing, human readable, no group info
+alias l.='ls -d .[^.]*'
+alias e='exit'
+alias p='ping ya.ru'
+# Processes
+alias tu='top -o cpu' # cpu
+alias tm='top -o vsize' # memory
+
+# Aptitude
+alias ai='sudo aptitude install'
+alias au='sudo aptitude update'
+alias ag='sudo aptitude upgrade'
+alias ad='sudo aptitude safe-upgrade'
+alias arm='sudo aptitude remove'
+alias as='aptitude search'
+alias aug='sudo aptitude update; sudo aptitude upgrade'
+
+#GIT aliases
+alias glg='git log'
+alias glp='git log -p'
+alias gst='git status'
+alias ga='git add'
+alias gl='git pull'
+alias gp='git push'
+alias gd='git diff'
+alias gdc='git diff --cached'
+alias gc='git commit --verbose'
+alias gcm='git commit --verbose -m'
+alias gca='git commit --verbose -a'
+alias gcam='git commit --verbose -a -m'
+alias gco='git checkout'
+alias gb='git branch'
+alias gba='git branch -a'
+alias grs='git reset --soft'
+alias grh='git reset HEAD'
+alias gcp='git cherry-pick -n'
+alias gs='git show'
+
+#SVN aliases
+alias slg='svn log'
+alias sst='svn status'
+alias scu='svn cleanup'
+alias sd='svn diff'
+alias sc='svn commit'
+alias sco='svn checkout'
+alias ssw='svn switch'
+
+#Ruby aliases
+alias cucumber='bundle exec cucumber -r features'
+alias rake='bundle exec rake'
+alias gem='bundle exec gem'
+alias rspec='bundle exec rspec'
+
