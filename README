@@ -1,1 +1,8 @@
 My dotfiles
+
+Instalation:
+mkdir Programs && cd !$
+git clone https://AlbertGazizov@github.com/AlbertGazizov/dotfiles.git
+echo "source ~/Programs/dotfiles/bash/config" > ~/.zshrc
+echo "source ~/Programs/dotfiles/bash/aliases" > ~/.zshrc
+ln -s ~/Programs/dotfiles/git/gitconfig ~/.gitconfig
