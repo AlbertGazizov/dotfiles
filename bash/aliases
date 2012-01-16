@@ -176,6 +176,7 @@ alias mongod='cd ~/Programs/mongodb6/bin && sudo ./mongod'
 alias cdd='cd -'
 alias cdpl='cd ~/Projects/ruby/esp/platform'
 alias cddi='cd ~/Projects/ruby/DecideIt-Test-Task'
+alias cden='cd ~/Projects/java/enroleWeb'
 alias ls='ls --color=auto'
 alias ll='ls -lhG --color=auto'  # -l long listing, human readable, no group info
 alias l.='ls -d .[^.]*'
