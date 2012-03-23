@@ -1,6 +1,6 @@
 My dotfiles
 
-Instalation:
+Installation:
 mkdir Programs && cd !$
 git clone https://AlbertGazizov@github.com/AlbertGazizov/dotfiles.git
 echo "source ~/Programs/dotfiles/bash/config" > ~/.zshrc
