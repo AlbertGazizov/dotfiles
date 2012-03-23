@@ -63,8 +63,10 @@ alias vi='vim'
 alias mongod='cd ~/Programs/mongodb6/bin && sudo ./mongod'
 alias cdd='cd -'
 alias cdpl='cd ~/Projects/ruby/esp/platform'
-alias cddi='cd ~/Projects/ruby/DecideIt-Test-Task'
+alias cdsp='cd ~/Projects/java/space'
 alias cden='cd ~/Projects/java/enroleWeb'
+alias cdal='cd ~/Programs/dotfiles/bash'
+alias cdgl='cd ~/Programs/glassfish-3.1.1/glassfish/domains/domain1/logs/'
 alias ls='ls --color=auto'
 alias ll='ls -lhG --color=auto'  # -l long listing, human readable, no group info
 alias l.='ls -d .[^.]*'
@@ -77,11 +79,11 @@ alias tm='top -o vsize' # memory
 # Aptitude
 alias ai='sudo aptitude install'
 alias au='sudo aptitude update'
-alias ag='sudo aptitude upgrade'
+alias ag='sudo aptitude upgrade -y'
 alias ad='sudo aptitude safe-upgrade'
 alias arm='sudo aptitude remove'
 alias as='aptitude search'
-alias aug='sudo aptitude update; sudo aptitude upgrade'
+alias aug='sudo aptitude update; sudo aptitude upgrade -y'
 
 #GIT aliases
 alias glg='git log'

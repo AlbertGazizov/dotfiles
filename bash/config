@@ -139,6 +139,7 @@ export M2_HOME="/usr/local/apache-maven/apache-maven-3.0.3"
 export MAVEN_HOME="/usr/local/apache-maven/apache-maven-3.0.3"
 export M2="/usr/local/apache-maven/apache-maven-3.0.3/bin"
 export PATH=$PATH:$JBOSS_HOME/bin:$M2_HOME/bin
+export ROO_HOME="/home/albert/Programs/spring-roo-1.2.1.RELEASE"
 
 
 #RUBY

@@ -44,8 +44,8 @@ kado = !gitk --all --date-order
 kasd = !gitk --all --simplify-by-decoration
 
 [user]
-  name = Albert Gazizov
-  email = deeper4k@gmail.com
+	name = Albert Gazizov
+	email = deeper4k@gmail.com
 
 [color]
   branch = auto
