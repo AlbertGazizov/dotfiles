@@ -1,1 +1,21 @@
-PS1='\[\e[0;34m\]\w\[\e[m\] \[\e[1;34m\]>\[\e[m\] \[\e[1;37m\]'
+git_branch() {
+  git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
+}
+
+git_dirty() {
+  [ $(git status --short 2> /dev/null | wc -l) != 0 ] && \
+    echo -e "${txtred}*${txtrst}"
+}
+
+PS1='\[\e[0;34m\]\w\[\e[m\]\[\e[0;37m\]$(git_branch)$(git_dirty) >\[\e[m\] \[\e[1;37m\]'
+
+export RUBY_HEAP_MIN_SLOTS=1000000
+export RUBY_HEAP_SLOTS_INCREMENT=1000000
+export RUBY_HEAP_SLOTS_GROWTH_FACTOR=1
+export RUBY_GC_MALLOC_LIMIT=1000000000
+export RUBY_HEAP_FREE_MIN=500000
+
+export JAVA_HOME=`/usr/libexec/java_home`
+export PATH=$JAVA_HOME:$PATH
+
+export PATH=/usr/local/Cellar/maven/3.0.4/bin:$PATH
