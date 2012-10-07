@@ -107,6 +107,7 @@ alias grs='git reset --soft'
 alias grh='git reset HEAD'
 alias gcp='git cherry-pick -n'
 alias gs='git show'
+alias glr='git pull --rebase origin'
 
 #SVN aliases
 alias slg='svn log'
@@ -118,10 +119,13 @@ alias sco='svn checkout'
 alias ssw='svn switch'
 
 #Ruby aliases
+alias bi='bundle install'
 alias cucumber='bundle exec cucumber -r features'
 alias rake='bundle exec rake'
+alias rails='bundle exec rails'
 #alias gem='bundle exec gem'
 alias rspec='bundle exec rspec -fd'
+alias rspecd='bundle exec rspec -fd --drb'
 alias rails='bundle exec rails'
 alias spork='bundle exec spork'
 
