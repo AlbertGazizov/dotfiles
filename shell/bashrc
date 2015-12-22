@@ -12,6 +12,7 @@ PS1='\[\e[0;34m\]\w\[\e[m\]\[\e[0;37m\]$(git_branch)$(git_dirty) >\[\e[m\] \[\e[
 export RUBY_GC_MALLOC_LIMIT=1000000000
 export RUBY_HEAP_FREE_MIN=500000
 export RUBY_HEAP_MIN_SLOTS=40000
+export RUBY_GC_HEAP_INIT_SLOTS=40000
 
 export JAVA_HOME=`/usr/libexec/java_home`
 export PATH=$JAVA_HOME:$PATH
@@ -19,4 +20,5 @@ export PATH=$JAVA_HOME:$PATH
 export PATH=/usr/local/Cellar/maven/3.0.4/bin:$PATH
 export PATH=/usr/local/sbin:$PATH
 
-export EDITOR=mvim
+export EDITOR="emacsclient -c"
+#export RUBYOPT=-rbumbler/go
