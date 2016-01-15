@@ -24,11 +24,13 @@ values."
      ;; ----------------------------------------------------------------
      ;; auto-completion
      ;; better-defaults
-     ruby
+     ;; ruby
+     ;; syntax-checking
      osx
      emacs-lisp
      clojure
      html
+     javascript
      ;; git
      ;; markdown
      ;; org
@@ -49,7 +51,11 @@ values."
    ;; If non-nil spacemacs will delete any orphan packages, i.e. packages that
    ;; are declared in a layer which is not a member of
    ;; the list `dotspacemacs-configuration-layers'. (default t)
-   dotspacemacs-delete-orphan-packages t))
+   dotspacemacs-delete-orphan-packages t
+
+   ;; JS indentation
+   js2-basic-offset 2
+   js-indent-level 2))
 
 (defun dotspacemacs/init ()
   "Initialization function.
@@ -119,7 +125,7 @@ values."
    ;; auto-save the file in-place, `cache' to auto-save the file to another
    ;; file stored in the cache directory and `nil' to disable auto-saving.
    ;; (default 'cache)
-   dotspacemacs-auto-save-file-location 'original
+   ;; dotspacemacs-auto-save-file-location 'nil
    auto-save-interval 1
    auto-save-timeout 1
    ;; If non nil then `ido' replaces `helm' for some commands. For now only
@@ -210,14 +216,20 @@ user code."
 (global-set-key (kbd "s-7") 'frame-tag-select-frame-7)
 (global-set-key (kbd "s-8") 'frame-tag-select-frame-8)
 (global-set-key (kbd "s-9") 'frame-tag-select-frame-9)
-(global-set-key (kbd "s-b") 'delete-frame)
+(global-set-key (kbd "C-n") 'new-frame)
+(global-set-key (kbd "C-b") 'delete-frame)
 
 (defun dotspacemacs/user-config ()
+  (setq x-select-enable-clipboard t)
   (setq neo-vc-integration nil)
   (setq neo-show-hidden-files nil)
   (setq large-file-warning-threshold nil)
   (setq ruby-deep-indent-paren nil)
   (setq js-indent-level 2)
+  (setq web-mode-markup-indent-offset 2)
+  ;; (setq make-backup-files nil)
+
+
   ;; (define-key frame-tag-mode (kbd "s-1") #'frame-tag-select-frame-1)
   (frame-tag-mode 1)
 
