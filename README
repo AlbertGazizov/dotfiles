@@ -6,3 +6,4 @@ git clone https://AlbertGazizov@github.com/AlbertGazizov/dotfiles.git
 echo "source ~/Programs/dotfiles/shell/bashrc" > ~/.bashrc
 echo "source ~/Programs/dotfiles/shell/aliases" > ~/.bashrc
 ln -s ~/Programs/dotfiles/git/gitconfig ~/.gitconfig
+ln -s ~/Programs/dotfiles/shell/spacemacs ~/.spacemacs
