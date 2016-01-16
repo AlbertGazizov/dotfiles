@@ -15,10 +15,14 @@ export RUBY_HEAP_MIN_SLOTS=40000
 export RUBY_GC_HEAP_INIT_SLOTS=40000
 
 #export JAVA_HOME=`/usr/libexec/java_home`
-export PATH=$JAVA_HOME:$PATH
+#export PATH=$JAVA_HOME:$PATH
 
-export PATH=/usr/local/Cellar/maven/3.0.4/bin:$PATH
-export PATH=/usr/local/sbin:$PATH
+#export PATH=/usr/local/Cellar/maven/3.0.4/bin:$PATH
+#export PATH=/usr/local/sbin:$PATH
+export PATH="$HOME/.rbenv/bin:$PATH"
 
-export EDITOR="emacsclient -c"
+
+export EDITOR="vim"
 #export RUBYOPT=-rbumbler/go
+
+eval "$(rbenv init -)"
