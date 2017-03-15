@@ -1,14 +1,6 @@
 ;; -*- mode: emacs-lisp -*-
-;; This file is loaded by Spacemacs at startup.
-;; It must be stored in your home directory.
 (defun dotspacemacs/layers ()
-  "Configuration Layers declaration.
-You should not put any user code in this function besides modifying the variable
-values."
   (setq-default
-   ;; Base distribution to use. This is a layer contained in the directory
-   ;; `+distribution'. For now available distributions are `spacemacs-base'
-   ;; or `spacemacs'. (default 'spacemacs)
    dotspacemacs-distribution 'spacemacs
    ;; List of additional paths where to look for configuration layers.
    ;; Paths must have a trailing slash (i.e. `~/.mycontribs/')
@@ -22,7 +14,7 @@ values."
      ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
      ;; <M-m f e R> (Emacs style) to install them.
      ;; ----------------------------------------------------------------
-     ;; auto-completion
+     auto-completion
      ;; better-defaults
      ;; ruby
      ;; syntax-checking
@@ -31,7 +23,8 @@ values."
      clojure
      html
      javascript
-     ;; git
+     git
+     (eyebrowse :variables eyebrowse-display-help nil)
      ;; markdown
      ;; org
      ;; (shell :variables
@@ -125,9 +118,9 @@ values."
    ;; auto-save the file in-place, `cache' to auto-save the file to another
    ;; file stored in the cache directory and `nil' to disable auto-saving.
    ;; (default 'cache)
-   ;; dotspacemacs-auto-save-file-location 'nil
-   auto-save-interval 1
-   auto-save-timeout 1
+   dotspacemacs-auto-save-file-location 'cache
+   ;; auto-save-interval 1
+   ;; auto-save-timeout 1
    ;; If non nil then `ido' replaces `helm' for some commands. For now only
    ;; `find-files' (SPC f f), `find-spacemacs-file' (SPC f e s), and
    ;; `find-contrib-file' (SPC f e c) are replaced. (default nil)
@@ -226,11 +219,12 @@ user code."
   (setq large-file-warning-threshold nil)
   (setq ruby-deep-indent-paren nil)
   (setq js-indent-level 2)
+  (setq css-indent-offset 2)
   (setq web-mode-markup-indent-offset 2)
-  ;; (setq make-backup-files nil)
+  (setq web-mode-css-indent-offset 2)
 
+  (setq create-lockfiles nil)
 
-  ;; (define-key frame-tag-mode (kbd "s-1") #'frame-tag-select-frame-1)
   (frame-tag-mode 1)
 
   "Configuration function for user code.
