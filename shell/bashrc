@@ -1,13 +1,36 @@
-git_branch() {
-  git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
+#	git_branch() {
+#	  git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
+#	}
+
+	find_git_dirty() {
+	  [ $(git status --short 2> /dev/null | wc -l) != 0 ] && \
+	    echo -e "${txtred}*${txtrst}"
+	}
+find_git_branch() {
+  # Based on: http://stackoverflow.com/a/13003854/170413
+  local branch
+  if branch=$(git rev-parse --abbrev-ref HEAD 2> /dev/null); then
+    if [[ "$branch" == "HEAD" ]]; then
+      branch='detached*'
+    fi
+    git_branch="($branch)"
+  else
+    git_branch=""
+  fi
+  echo $git_branch
 }
 
-git_dirty() {
-  [ $(git status --short 2> /dev/null | wc -l) != 0 ] && \
-    echo -e "${txtred}*${txtrst}"
-}
+#find_git_dirty() {
+#  local status=$(git status --porcelain 2> /dev/null)
+#  if [[ "$status" != "" ]]; then
+#    git_dirty='*'
+#  else
+#    git_dirty=''
+#  fi
+#  echo $git_dirty
+#}
 
-PS1='\[\e[0;34m\]\w\[\e[m\]\[\e[0;37m\]$(git_branch)$(git_dirty) >\[\e[m\] \[\e[1;37m\]'
+PS1='\[\e[0;34m\]\w\[\e[m\]\[\e[0;37m\]$(find_git_branch)$(find_git_dirty) >\[\e[m\] \[\e[1;37m\]'
 
 export RUBY_GC_MALLOC_LIMIT=1000000000
 export RUBY_HEAP_FREE_MIN=500000
@@ -19,10 +42,12 @@ export RUBY_GC_HEAP_INIT_SLOTS=40000
 
 #export PATH=/usr/local/Cellar/maven/3.0.4/bin:$PATH
 #export PATH=/usr/local/sbin:$PATH
-export PATH="$HOME/.rbenv/bin:$PATH"
 
+export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init -)"
 
 export EDITOR="vim"
 #export RUBYOPT=-rbumbler/go
 
-eval "$(rbenv init -)"
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" # This loads nvm
