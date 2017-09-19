@@ -62,6 +62,9 @@ kasd = !gitk --all --simplify-by-decoration
   editor = vim
   excludesfile = ~/.gitignore
 
+[push]
+  default = simple
+
 #[github]
 #  user = AlbertGazizov
 #  token = ca0c2f7a61d069fc2eac7df44dc31366

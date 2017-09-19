@@ -242,5 +242,8 @@ layers configuration. You are free to put any user code."
           )
 ;; (require 'ws-butler)
 (add-hook 'ruby-mode-hook 'ws-butler-mode)
+(add-hook 'prog-mode-hook 'turn-on-fci-mode)
+(add-hook 'text-mode-hook 'turn-on-fci-mode)
+
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
