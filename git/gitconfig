@@ -63,9 +63,18 @@ kasd = !gitk --all --simplify-by-decoration
   excludesfile = ~/.gitignore
 
 [push]
-  default = simple
+	default = simple
 
 #[github]
 #  user = AlbertGazizov
 #  token = ca0c2f7a61d069fc2eac7df44dc31366
 
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[branch]
+	autosetuprebase = always
+[rebase]
+	autosquash = true
